@@ -4,8 +4,11 @@ const flightsController = require('../controllers/flights')
 
 
 // Post /flights/index
-router.post('/', flightsController.index);
+router.post('/', flightsController.add);
+// Get /flights/index
+router.get('/', flightsController.index)
 // GET /flights/add
 router.get('/addFlight', flightsController.addForm)
+
 
 module.exports = router;

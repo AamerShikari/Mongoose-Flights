@@ -1,4 +1,4 @@
-const Flights = require('../models/flights')
+const Flight = require('../models/flights')
 
 module.exports = {
     index,
@@ -7,16 +7,26 @@ module.exports = {
 }
 
 function add (req, res) {
-    console.log(req.body)
+    let time = new Date(req.body.departs)
+    req.body.departs = time.toString()
+
+    const flight = new Flight(req.body)
+    flight.save(function (err) {
+        if (err) {
+            res.redirect('/flights/add')
+        }
+        console.log(flight)
+        res.redirect('/flights')
+    })
+       
 }
 
 function addForm (req, res) {
-    console.log("your going to me!")
     res.render('flights/add')
 }
 
 function index (req, res) { 
-    Flights.find({}, function(err, flights){
+    Flight.find({}, function(err, flights){
         res.render('flights/index', {flights: flights})
     })
 }
