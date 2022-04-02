@@ -1,0 +1,43 @@
+<%- include('../partials/header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Details of Flight Number : <%= flight.flightNo %> </h1>
+
+    <h2> airline: <%= flight.airline %> </h2>
+    <h2> airport: <%= flight.airport %>  </h2>
+    <h2> dpearts: <%= flight.departs %> </h2>
+
+    <br><form action="/flights/<%= flight.flightNo %>/destination" method="POST" autocomplete="off">
+        <input type="text" name="location">
+        <input type="submit" value="Add Destination">
+    </form>
+
+
+    <% if (flight.destinations.length) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Destination</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% flight.destinations.forEach(function(r) { %>
+              <tr>
+                <td><%= r.location %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <h5>No Destinations Yet</h5>
+      <% } %>
+</body>
+</html>

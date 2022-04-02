@@ -3,12 +3,15 @@ var router = express.Router();
 const flightsController = require('../controllers/flights')
 
 
-// Post /flights/index
+// POST /flights/index
 router.post('/', flightsController.add);
-// Get /flights/index
+// GET /flights/index
 router.get('/', flightsController.index)
 // GET /flights/add
 router.get('/addFlight', flightsController.addForm)
+// GET /flights/:id
+router.get('/:id', flightsController.show);
+
 
 
 module.exports = router;
