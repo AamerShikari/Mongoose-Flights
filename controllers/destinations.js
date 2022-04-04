@@ -12,6 +12,9 @@ function add(req, res) {
             delete req.body.arrivals
         }
         flight.destinations.push(req.body)
+        flight.destinations.sort(function(a,b){
+            return new Date (a.arrival) - new Date(b.arrival) 
+        })
         flight.save(function(err) {
             res.redirect(`/flights/${flight.flightNo}`);
           });

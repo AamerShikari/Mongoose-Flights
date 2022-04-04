@@ -24,6 +24,7 @@ function show(req, res) {
   Flight.findOne({ flightNo: req.params.id })
   .populate('tickets')
   .exec(function(err, flight){
+    
     res.render('flights/show', {flight: flight})
   });
 }

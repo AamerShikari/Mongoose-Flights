@@ -22,18 +22,19 @@
       </tr>
     </thead>
     <tbody>
-      <% flights.forEach(f => { %>  
+      <% let today = new Date() %>
+      <% let temp = 'black' %>  
+      <% flights.forEach(f => { %>
+        <% temp = (today > f.departs) ? 'red' : 'white' %>
         <tr>
-            <td><%= f.airline %></td>
-            <td><%= f.airport %></td>
-            <td><%= f.flightNo %></td>
-            <td><%= f.departs%></td>
-            <td><button type="button" class="btn btn-link"><a href="/flights/<%= f.flightNo %>">Details</a></button></td>
+            <td style="color: <%= temp %>"><%= f.airline %></td>
+            <td style="color: <%= temp %>"><%= f.airport %></td>
+            <td style="color: <%= temp %>"><%= f.flightNo %></td>
+            <td style="color: <%= temp %>"><%= f.departs%></td>
+            <td ><button type="button" class="btn btn-link"><a href="/flights/<%= f.flightNo %>">Details</a></button></td>
           </tr>
         <% }) %>
     </tbody>
   </table>
-
-  
 </body>
 </html>
