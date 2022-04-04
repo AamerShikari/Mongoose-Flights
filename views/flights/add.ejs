@@ -30,9 +30,9 @@
       <label> Flight Number: 
         <input type="text" name="flightNo"></label><br />
       <label>Departs: 
-          <% let date = new Date() %>
-          <% date.setFullYear(date.getFullYear() + 1) %> 
-        <input type="datetime-local" name="departs" value="<%= date %> "/> </label><br />
+        <% let date = new Date() %> 
+        <% date.setDate(date.getDate() + 365) %>
+        <input type="datetime-local" name="departs" value="<%= date.toISOString().slice(0, 16) %>"/> </label><br />
       <input type="submit" value="Add Flight" />
     </form>
   </body>
