@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 	
 const destinationSchema = new Schema({
-  location: String 
+  airport: String, 
+  arrival: {
+    type: Date,
+    default: createDate()
+  } 
 });
 
 const flightSchema = new Schema({
@@ -15,7 +19,8 @@ const flightSchema = new Schema({
     type: Date,
     default: createDate()
   },
-  destinations: [destinationSchema]
+  destinations: [destinationSchema],
+  tickets: [{type: Schema.Types.ObjectId, ref: 'Ticket'}]
 });
 
 function createDate() {
@@ -25,4 +30,4 @@ function createDate() {
 }
 
 // Compile the schema into a model and export it
-module.exports = mongoose.model('F', flightSchema);
+module.exports = mongoose.model('Flight', flightSchema);

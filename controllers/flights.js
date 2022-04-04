@@ -1,6 +1,7 @@
 const req = require("express/lib/request");
 const res = require("express/lib/response");
 const Flight = require("../models/flights");
+const Ticket = require('../models/tickets');
 
 module.exports = {
   index,
@@ -20,8 +21,10 @@ function sortByDate() {
 }
 
 function show(req, res) {
-  Flight.findOne({ flightNo: req.params.id }, function (err, flight) {
-    res.render("Flights/show", { flight: flight });
+  Flight.findOne({ flightNo: req.params.id })
+  .populate('tickets')
+  .exec(function(err, flight){
+    res.render('flights/show', {flight: flight})
   });
 }
 

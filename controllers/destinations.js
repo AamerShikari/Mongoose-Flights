@@ -8,9 +8,10 @@ module.exports = {
 
 function add(req, res) {
     Flight.findOne({flightNo: req.params.id}, function(err, flight){
-        console.log(req.body)
+        if (req.body.arrivals === ''){
+            delete req.body.arrivals
+        }
         flight.destinations.push(req.body)
-        console.log(flight.destinations)
         flight.save(function(err) {
             res.redirect(`/flights/${flight.flightNo}`);
           });
