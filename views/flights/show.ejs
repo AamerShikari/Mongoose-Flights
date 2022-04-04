@@ -13,7 +13,7 @@
 
     <h2> airline: <%= flight.airline %> </h2>
     <h2> airport: <%= flight.airport %>  </h2>
-    <h2> dpearts: <%= flight.departs %> </h2>
+    <h2> departs: <%= flight.departs %> </h2>
 
     <br><form action="/flights/<%= flight.flightNo %>/destination" method="POST" autocomplete="off">
         <input type="text" name="location">

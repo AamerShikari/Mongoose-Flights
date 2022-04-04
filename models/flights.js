@@ -8,10 +8,21 @@ const destinationSchema = new Schema({
 const flightSchema = new Schema({
   airport: String,
   airline: String,
-  flightNo: String,
-  departs: String,
+  flightNo: {
+    type: String,
+  },
+  departs: {
+    type: Date,
+    default: createDate()
+  },
   destinations: [destinationSchema]
 });
-	
+
+function createDate() {
+  let current = new Date() 
+  current.setFullYear(current.getFullYear + 1)
+  return current
+}
+
 // Compile the schema into a model and export it
 module.exports = mongoose.model('F', flightSchema);
