@@ -7,7 +7,17 @@ module.exports = {
   addForm,
   add,
   show,
+  sortByDate,
 };
+
+function sortByDate() {
+  Flight.find({})
+    .sort({ departs: "asc" })
+    .exec(function (err, flights) {
+      console.log(flights);
+      res.redirect("flights/index", { flights: flights });
+    });
+}
 
 function show(req, res) {
   Flight.findOne({ flightNo: req.params.id }, function (err, flight) {
@@ -20,8 +30,8 @@ function addForm(req, res) {
 }
 
 function add(req, res) {
-  if (req.body.departs === '') {
-    delete req.body.departs
+  if (req.body.departs === "") {
+    delete req.body.departs;
   }
 
   const flight = new Flight(req.body);
@@ -35,8 +45,9 @@ function add(req, res) {
 }
 
 function index(req, res) {
-  Flight.find({}, function (err, flights) {
-    res.render("flights/index", { flights: flights });
-  });
+  Flight.find({})
+    .sort({ departs: "asc" })
+    .exec(function (err, flights) {
+      res.render("flights/index", { flights: flights });
+    });
 }
-
