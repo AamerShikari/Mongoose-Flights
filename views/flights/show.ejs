@@ -29,21 +29,26 @@
       method="POST"
       autocomplete="off"
     >
-    <label> Airport:
-      <select name="airport">
+      <label>
+        Airport:
+        <select name="airport">
           <option value="ATL">ATL</option>
           <option value="DFW">DFW</option>
           <option value="DEN">DEN</option>
           <option value="LAX">LAX</option>
           <option value="SAN">SAN</option>
-        </select> </label><br />
-        <% let date = new Date() %> 
-        <% date.setDate(date.getDate() + 365) %>
-      <input type="datetime-local" name="arrival" value="<%= date.toISOString().slice(0, 16) %>"/>
+        </select> </label
+      ><br />
+      <% let date = new Date() %> <% date.setDate(date.getDate() + 365) %>
+      <input
+        type="datetime-local"
+        name="arrival"
+        value="<%= date.toISOString().slice(0, 16) %>"
+      />
       <input type="submit" value="Add Destination" />
     </form>
 
-      <% if (flight.destinations.length) { %>
+    <% if (flight.destinations.length) { %>
     <table>
       <thead>
         <tr>
@@ -53,7 +58,12 @@
       <tbody>
         <% flight.destinations.forEach(function(r) { %>
         <tr>
-          <td><%= r.airport %> - <%= r.arrival %> </td>
+          <td>
+            <%= r.airport %> - <%= r.arrival %>
+            <form name = 'delete-form' action="/flights/<%= flight.flightNo %>/<%= r.arrival %>?_method=DELETE" method="POST">
+              <button type="submit">DELETE</button>
+            </form>
+          </td>
         </tr>
         <% }); %>
       </tbody>

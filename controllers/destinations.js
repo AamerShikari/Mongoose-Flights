@@ -1,9 +1,11 @@
 const req = require('express/lib/request')
 const res = require('express/lib/response')
+const flights = require('../models/flights')
 const Flight = require('../models/flights')
 
 module.exports = {
-    add
+    add,
+    remove
 }
 
 function add(req, res) {
@@ -19,4 +21,13 @@ function add(req, res) {
             res.redirect(`/flights/${flight.flightNo}`);
           });
     })
+}
+
+function remove(req, res) {
+    Flight.findOneAndUpdate(
+        {flightNo: req.params.id}, 
+        {$pull: {destinations: {arrival: req.params.arrival}}}, 
+        function (err){
+            res.redirect(`/flights/${req.params.id}`)
+        })
 }
